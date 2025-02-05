@@ -1,0 +1,237 @@
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --background-color: #263748;
+  --form-background: #ffffff;
+  --text-color: #1e293b;
+  --label-color: #64748b;
+  --border-color: #e2e8f0;
+  --success-color: #22c55e;
+  --error-color: #ef4444;
+  --input-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #263748 0%, #263748 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.page {
+  width: 100%;
+  margin: 2rem auto;
+  background-color: transparent;
+}
+
+.form-container {
+  display: flex;
+  gap: 2rem;
+  animation: fadeIn 0.6s ease-out;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.FormSection {
+  background-color: var(--form-background);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-base);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.FormSection:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+}
+
+.SectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.SectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), transparent);
+  border-radius: 2px;
+}
+
+.FormContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(1000px, 1fr)); 
+  gap: 0.5rem; /* Adjusted gap */
+}
+
+.FormContent label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--label-color);
+  margin-bottom: 0rem;
+  transition: var(--transition-base);
+}
+
+.input-group {
+  position: relative;
+}
+
+input, select {
+  width: 95%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: var(--transition-base);
+  background-color: white;
+  box-shadow: var(--input-shadow);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+input:hover {
+  border-color: var(--primary-color);
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+button[type="submit"] {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-base);
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+button[type="submit"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.6s ease-out;
+}
+
+button[type="submit"]:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page {
+    width: 95%;
+    margin: 1rem auto;
+  }
+
+  .FormSection {
+    padding: 1.5rem;
+  }
+
+  .FormContent {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Loading state animations */
+.loading {
+  position: relative;
+}
+
+.loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
